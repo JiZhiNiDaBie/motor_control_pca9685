@@ -143,6 +143,7 @@ void motor::setup(int pin1, int pin2, const pca &inputPca, int inputChannel)
 void motor::setSpeed(double duty)
 {
 //	using namespace std;
+	currentSpeed = duty;
 	bool flag = (duty >= 0);
 	digitalWrite(pin_1, flag);
 //		cout << "pin " << pin_1 << " set to " << flag << endl;
@@ -158,13 +159,15 @@ void motor::setSpeed(double duty)
 
 void motor::stop()
 {
-	for(int i = 0; i < 3; ++i)
-	{
-		setSpeed(-0.9);
-		delay(10);
-		setSpeed(0.9);
-		delay(10);
-	}
+//	for(int i = 0; i < 3; ++i)
+//	{
+//		setSpeed(-0.9);
+//		delay(10);
+//		setSpeed(0.9);
+//		delay(10);
+//	}
+	setSpeed(-currentSpeed);
+	delay(30);
 	setSpeed(0);
 }
 
